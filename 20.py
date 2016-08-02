@@ -6,6 +6,14 @@
 # returns (then prints) an appropriate boolean.
 import random
 
-rlist = sorted([random.randint(1,100) for i in range(20)])
 
-print(rlist)
+def find(ordered_list, element_to_find):
+    if num in rlist:
+        return print("True")
+    else:
+        return print("False")
+
+if __name__=="__main__":
+    rlist = sorted([random.randint(1,100) for i in range(50)])
+    num = random.randint(1,100)
+    find(rlist,num)
