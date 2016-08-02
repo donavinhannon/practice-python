@@ -8,7 +8,7 @@ import random
 
 
 def find(ordered_list, element_to_find):
-    if num in rlist:
+    if element_to_find in ordered_list:
         return print("True")
     else:
         return print("False")
