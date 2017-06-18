@@ -11,13 +11,13 @@ inn = str(input(inn_text))
 
 while inn != 'c':
     if inn == 'h':
-        top = guess
-        guess -= round((top - bottom) / 2)
+        top = int(guess)
+        guess = int((top + bottom) / 2)
         print('Is your secret number ' + str(guess) + '?')
         inn = str(input(inn_text))
     elif inn == 'l':
-        bottom = guess
-        guess += round((top - bottom) / 2)
+        bottom = int(guess)
+        guess = int((top + bottom) / 2)
         print('Is your secret number ' + str(guess) + '?')
         inn = str(input(inn_text))
     else:
