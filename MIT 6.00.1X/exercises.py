@@ -1,12 +1,11 @@
 # Write a program to calculate the credit card balance after one year if a person only pays the minimum monthly payment
 # required by the credit card company each month.
 
-balance = 42
+balance = 3329
 annualInterestRate = 0.2
-monthlyPaymentRate = 0.04
 
 
-def ccBalance(balance, annualInterestRate = annualInterestRate, monthlyPaymentRate = monthlyPaymentRate, months = 1):
+def ccBalance(balance, annualIntRate=annualInterestRate, fixedPayment=10, months=1):
     """
     :param balance: positive int or float, current balance owed on credit card
     :param annualInterestRate: positive float, annual interest rate for the credit card
@@ -15,16 +14,20 @@ def ccBalance(balance, annualInterestRate = annualInterestRate, monthlyPaymentRa
     :return: positive float, rounded to two decimal places, balance on credit card after 1 year of minimum payments
     """
     previousBalance = balance
-    monthlyInterestRate = (annualInterestRate) / 12.0
-    minimumMonthlyPayment = (monthlyPaymentRate) * (previousBalance)
-    monthlyUnpaidBalance = (previousBalance) - (minimumMonthlyPayment)
+    monthlyInterestRate = (annualIntRate) / 12.0
+    monthlyUnpaidBalance = (previousBalance) - (fixedPayment)
     updatedBalance = (monthlyUnpaidBalance) + (monthlyInterestRate * monthlyUnpaidBalance)
     updatedBalance = round(updatedBalance, 2)
+    print(updatedBalance)
     if months == 12:
-        return 'Remaining balance: ' + str(updatedBalance)
+        if updatedBalance <= 0:
+            return 'Lowest Payment: ' + str(fixedPayment) + '\n' + 'Remaining balance: ' + str(updatedBalance)
+        else:
+            fixedPayment += 10
+            return ccBalance(balance, fixedPayment=fixedPayment, months=1)
     else:
         months += 1
-        return ccBalance(updatedBalance, months)
+        return ccBalance(updatedBalance, fixedPayment=fixedPayment, months=months)
 
 
 print(ccBalance(balance))
