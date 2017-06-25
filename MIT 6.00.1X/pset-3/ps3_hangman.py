@@ -50,7 +50,10 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    # FILL IN YOUR CODE HERE...
+    count = 0
+    for l in lettersGuessed:
+        count += secretWord.count(l)
+    return len(secretWord) <= count
 
 
 
@@ -96,8 +99,10 @@ def hangman(secretWord):
     '''
     # FILL IN YOUR CODE HERE...
 
-
-
+secretWord = 'apple'
+lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
+print(isWordGuessed(secretWord, lettersGuessed))
+print(isWordGuessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u']))
 
 
 
