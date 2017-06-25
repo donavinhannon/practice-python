@@ -64,7 +64,14 @@ def getGuessedWord(secretWord, lettersGuessed):
     returns: string, comprised of letters and underscores that represents
       what letters in secretWord have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE...
+    guessedWord = []
+    for l in secretWord:
+        if l in lettersGuessed:
+            guessedWord.append(l)
+        else:
+            guessedWord.append('_')
+    guessedWord = ''.join(guessedWord)
+    return str(guessedWord)
 
 
 
@@ -74,8 +81,21 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
-    
+    import string
+    choices = []
+
+    for l in string.ascii_lowercase:
+        choices.append(l)
+
+    for l in lettersGuessed:
+        if l in choices:
+            choices.remove(l)
+        else:
+            continue
+
+    choices = ''.join(choices)
+    return choices
+
 
 def hangman(secretWord):
     '''
@@ -97,12 +117,21 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
+    lettersGuessed = []
+    avilableLetters = getAvailableLetters()
+    print('Welcome to the game, Hangman!')
+    print('I am thinking of a word that is {} letters long.\n-------------'.format(len(secretWord)))
+    guesses = 8
+    print('You have {} guesses left.'.format(guesses))
+    print('Available letters: {}'.format(getAvailableLetters(lettersGuessed)))
 
+
+hangman(chooseWord(wordlist))
 secretWord = 'apple'
 lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
-print(isWordGuessed(secretWord, lettersGuessed))
-print(isWordGuessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u']))
+print(getAvailableLetters(lettersGuessed))
+# print(getGuessedWord(secretWord, lettersGuessed))
+# print(isWordGuessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u']))
 
 
 
