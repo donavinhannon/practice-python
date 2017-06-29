@@ -9,6 +9,7 @@ def biggest(aDict):
         if len(elem[1]) > biggest_value:
             biggest_value = len(elem[1])
             biggest_key = elem[0]
+            print(len(elem[1]))
     return biggest_key
 
 
