@@ -71,8 +71,18 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    count = 0
+    score = 0
+    while count < len(word):
+        score += SCRABBLE_LETTER_VALUES[word[count]]
+        count += 1
 
+    score *= len(word)
+    if len(word) == n:
+        score += 50
+        return score
+    else:
+        return score
 
 
 #
@@ -142,8 +152,14 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
-
+    updated_hand = hand.copy()
+    i = 0
+    while i < len(word):
+        updated_hand[word[i]] -= 1
+        if updated_hand[word[i]] == 0:
+            updated_hand.pop(word[i])
+        i += 1
+    return updated_hand
 
 
 #
@@ -160,7 +176,7 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    # TODO ... <-- Remove this comment when you code this function
 
 
 #
@@ -174,7 +190,7 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
+    # TODO... <-- Remove this comment when you code this function
 
 
 
@@ -246,7 +262,7 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    # TODO ... <-- Remove this comment when you code this function
     print("playGame not yet implemented.") # <-- Remove this line when you code the function
    
 
