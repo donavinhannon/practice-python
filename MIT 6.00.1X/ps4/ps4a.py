@@ -91,7 +91,7 @@ def displayHand(hand):
     Displays the letters currently in the hand.
 
     For example:
-    >>> displayHand({'a':1, 'x':2, 'l':3, 'e':1})
+
     Should print out something like:
        a x x l l l e
     The order of the letters is unimportant.
@@ -227,7 +227,6 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
     score = 0
     
@@ -259,7 +258,7 @@ def playHand(hand, wordList, n):
                 hand = updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    return 'Goodbye! Total score: {} points.'.format(score)
+    return print('Goodbye! Total score: {} points.\n'.format(score))
 
 
 # Problem #5: Playing a game
@@ -277,10 +276,21 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TODO ... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this line when you code the function
-   
-
+    choice = 'n'
+    while choice != 'e':
+        choice = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        if choice == 'e':
+            break
+        elif choice == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        elif choice == 'r':
+            if 'hand' in locals():
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                print('You have not played a hand yet. Please play a new hand first!\n')
+        else:
+            print('Invalid command.')
 
 
 #
