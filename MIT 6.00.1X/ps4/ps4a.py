@@ -83,8 +83,6 @@ def getWordScore(word, n):
         return score
     else:
         return score
-
-
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -104,7 +102,6 @@ def displayHand(hand):
         for j in range(hand[letter]):
              print(letter,end=" ")       # print all on the same line
     print()                             # print an empty line
-
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
@@ -120,7 +117,7 @@ def dealHand(n):
     n: int >= 0
     returns: dictionary (string -> int)
     """
-    hand={}
+    hand = {}
     numVowels = n // 3
     
     for i in range(numVowels):
@@ -132,7 +129,6 @@ def dealHand(n):
         hand[x] = hand.get(x, 0) + 1
         
     return hand
-
 #
 # Problem #2: Update a hand by removing letters
 #
@@ -152,16 +148,14 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    updated_hand = hand.copy()
+    updatedHand = hand.copy()
     i = 0
     while i < len(word):
-        updated_hand[word[i]] -= 1
-        if updated_hand[word[i]] == 0:
-            updated_hand.pop(word[i])
+        updatedHand[word[i]] -= 1
+        if updatedHand[word[i]] == 0:
+            updatedHand.pop(word[i])
         i += 1
-    return updated_hand
-
-
+    return updatedHand
 #
 # Problem #3: Test word validity
 #
@@ -176,9 +170,23 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TODO ... <-- Remove this comment when you code this function
+    cards = hand.copy()
+    keys = cards.keys()
+    values = cards.values()
 
+    if word in wordList:
+        for i in range(len(word)):
+            if word[i] in keys:
+                cards[word[i]] -= 1
+            elif word[i] not in keys:
+                return False
 
+        for value in values:
+            if value < 0:
+                return False
+        return True
+    else:
+        return False
 #
 # Problem #4: Playing a hand
 #
@@ -190,8 +198,11 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TODO... <-- Remove this comment when you code this function
-
+    values = hand.values()
+    n = 0
+    for val in values:
+        n += val
+    return n
 
 
 def playHand(hand, wordList, n):
@@ -218,35 +229,39 @@ def playHand(hand, wordList, n):
     """
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
+    score = 0
     
     # As long as there are still letters left in the hand:
-    
+    while (calculateHandlen(hand)) > 0:
         # Display the hand
-        
+        print('Current Hand: ', end='')
+        displayHand(hand)
         # Ask user for input
-        
+        word = input('Enter word, or a "." to indicate that you are finished: ')
         # If the input is a single period:
-        
+        if word == '.':
             # End the game (break out of the loop)
-
+            break
             
         # Otherwise (the input is not a single period):
-        
+        else:
             # If the word is not valid:
-            
+            if not isValidWord(word, hand, wordList):
                 # Reject invalid word (print a message followed by a blank line)
-
+                print('Invalid word, please try again.\n')
             # Otherwise (the word is valid):
-
+            else:
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
-                # Update the hand 
-                
+                wordScore = getWordScore(word, n)
+                score += wordScore
+                print('"{}" earned {} points. Total: {} points\n'.format(word, wordScore, score))
+                # Update the hand
+                hand = updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    return 'Goodbye! Total score: {} points.'.format(score)
 
 
-#
 # Problem #5: Playing a game
 # 
 
