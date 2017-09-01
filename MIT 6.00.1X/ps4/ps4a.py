@@ -148,14 +148,14 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    updatedHand = hand.copy()
+    hand_copy = hand.copy()
     i = 0
     while i < len(word):
-        updatedHand[word[i]] -= 1
-        if updatedHand[word[i]] == 0:
-            updatedHand.pop(word[i])
+        hand_copy[word[i]] -= 1
+        if hand_copy[word[i]] == 0:
+            hand_copy.pop(word[i])
         i += 1
-    return updatedHand
+    return hand_copy
 #
 # Problem #3: Test word validity
 #
