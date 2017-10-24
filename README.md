@@ -35,4 +35,4 @@ Scoring
 * Every time you make a guess you will be told how many “cows” and “bulls” you have. 
 * Once the user guesses the correct number, the game is over. 
 * The number of guessed you took will be printed at the end.
-### [Basic Web Scraping] (https://github.com/Doanvin/practice-python/blob/master/org/21.py)
+### [Basic Web Scraping](https://github.com/Doanvin/practice-python/blob/master/org/21.py)
